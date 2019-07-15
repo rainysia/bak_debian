@@ -165,9 +165,10 @@ bak_file(){
 
     #==========5, others bak start========
     echo -e "\033[1;30m Back               : \033[0m\033[1;32m others \033[0m"
-    dpkg --get-selections > $bak_other"packagelist.txt"  > /dev/null 2>&1
+    echo "dpkg --get-selections > $bak_other"packagelist.txt
+    dpkg --get-selections > ${bak_other}packagelist.txt
     other_bak=("/home/sh"
-    'home/'$path_user'/.icons'
+    '/home/'$path_user'/.icons'
     '/usr/share/icons/'
     '/usr/share/applications/'
     '/home/vc/git/'
@@ -181,7 +182,7 @@ bak_file(){
     for i in ${other_bak[*]};
     do
         if [ -d "$i" ]; then
-            tar -zcvf $bak_other$i".tar.gz" $i  > /dev/null 2>&1
+            tar -zcvf $bak_other${i//\//_}.tar.gz $i  > /dev/null 2>&1
             echo -e "\033[1;30m Back other  success: \033[0m\033[1;33m "$i" \033[0m"
         else
             echo -e "\033[1;30m Back is not existed: \033[0m\033[1;33m "$i" \033[0m"
